@@ -1,11 +1,11 @@
 package com.npaw.dataservice.services;
 
-import com.npaw.dataservice.domain.Data;
-
+import com.npaw.dataservice.domain.Client;
 import java.util.List;
+import java.util.Optional;
 
 public interface IFinderService {
-     List<Data> findDataByAccountCode( String accountCode);
-    List<Data> findDataByAccountCodeAndTagetDevice(String accountCode,String device);
-    Iterable<Data>findAll();
+     List<Client> findDataByAccountCode( String accountCode);
+    Optional<Client> findDataByAccountCodeAndTargetDevice(String accountCode, String device);
+    Iterable<Client>findAll();
 }
