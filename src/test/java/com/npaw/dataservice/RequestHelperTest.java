@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class ResquestHelperTest {
+public abstract class RequestHelperTest extends BaseTest{
     @Autowired
     private MockMvc mockMvc;
 

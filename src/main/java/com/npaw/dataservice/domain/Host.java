@@ -17,4 +17,12 @@ public class Host implements Serializable {
 
     @Column
     private Integer percentage;
+
+    public Host() {
+    }
+    public Host(String hostDns,Integer percentage) {
+        this.hostDns=hostDns;
+        this.percentage=percentage;
+    }
+
 }

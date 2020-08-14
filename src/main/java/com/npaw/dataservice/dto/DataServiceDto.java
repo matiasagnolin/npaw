@@ -3,15 +3,16 @@ import lombok.Data;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @XmlRootElement(name = "q")
 @Data
 public class DataServiceDto {
     @XmlElement
-    private String h;
+    private List<String> host;
     @XmlElement
-    private String pt;
+    private String pingTime;
     @XmlElement
-    private String c;
+    private String uniqueHash;
 
 }

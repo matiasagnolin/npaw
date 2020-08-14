@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,13 +16,21 @@ public class Finder implements IFinderService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Client> findDataByAccountCode(String accountCode){
+    public Optional<Client> findClientByAccountCode(String accountCode){
         return repository.findDataByAccountCode(accountCode);
     }
     @Override
     @Transactional(readOnly = true)
-    public Optional<Client> findDataByAccountCodeAndTargetDevice(String accountCode, String device) {
-        return repository.findDataByAccountCodeAndTargetDevice(accountCode,device);
+    public Optional<Client> findClientByAccountCodeAndTargetDevice(String accountCode
+            , String targetDevice) {
+        Optional<Client> client =
+                repository.findDataByAccountCode(accountCode);
+
+        //check if client and target device exist
+        return client.filter(c -> c.getTargetDevice()
+                        .stream()
+                        .anyMatch(e->e.getName().equals(targetDevice)))
+                        .isPresent() ? client : null;
     }
 
     @Override
