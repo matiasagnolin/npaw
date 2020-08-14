@@ -17,6 +17,12 @@ public class TargetDevice implements Serializable {
     @Column
     public String name;
 
+    @Column
+    private String pluginVersion;
+
+    @Column
+    private String pingTime;
+
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     List<Host> hosts;
 }

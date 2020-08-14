@@ -17,7 +17,7 @@ public class Finder implements IFinderService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Client> findDataByAccountCode(String accountCode){
+    public Optional<Client> findDataByAccountCode(String accountCode){
         return repository.findDataByAccountCode(accountCode);
     }
     @Override

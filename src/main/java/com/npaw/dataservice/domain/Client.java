@@ -10,15 +10,13 @@ import java.util.List;
 @Data
 public class Client implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @Column
     private String accountCode;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TargetDevice> targetDevice;
-
-    @Column
-    private String pluginVersion;
-
-    @Column
-    private String pingTime;
 
 }

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFinderService {
-     List<Client> findDataByAccountCode( String accountCode);
+
+    Optional<Client> findDataByAccountCode( String accountCode);
     Optional<Client> findDataByAccountCodeAndTargetDevice(String accountCode, String device);
     Iterable<Client>findAll();
 }

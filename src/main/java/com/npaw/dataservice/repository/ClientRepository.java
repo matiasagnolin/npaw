@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends CrudRepository<Client,String> {
-    List<Client> findDataByAccountCode(String accountCode);
+    Optional<Client> findDataByAccountCode(String accountCode);
     Optional<Client> findDataByAccountCodeAndTargetDevice(String accountCode, String targetDevice);
 }

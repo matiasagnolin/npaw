@@ -29,8 +29,8 @@ public class DataServiceTest extends ResquestHelperTest{
 
     @Test
     public void it_should_find_an_existing_account(){
-        List<Client> list = finder.findDataByAccountCode(param.getFirst("accountCode"));
-        Assert.assertTrue(!list.isEmpty());
+        Optional<Client> client = finder.findDataByAccountCode(param.getFirst("accountCode"));
+        Assert.assertTrue(client.isPresent());
     }
     @Test
     public void it_should_find_an_existing_account_and_device(){
@@ -44,11 +44,11 @@ public class DataServiceTest extends ResquestHelperTest{
         Optional<Client> client = finder.findDataByAccountCodeAndTargetDevice(
                 param.getFirst("fakeAccount"),param.getFirst("fakeDevice"));
 
-        List<Client> list2 =
+        Optional<Client> client2 =
                 finder.findDataByAccountCode(param.getFirst("fakeAccount"));
 
         Assert.assertTrue(!client.isPresent());
-        Assert.assertTrue(list2.isEmpty());
+        Assert.assertTrue(!client2.isPresent());
     }
 
     @Test

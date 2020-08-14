@@ -32,13 +32,20 @@ public class DataController {
                                                                   @RequestParam String targetDevice,
                                                                   @RequestParam String pluginVersion){
         Optional<Client> client =
-                finder.findDataByAccountCodeAndTargetDevice(accountCode,targetDevice);
+                finder.findDataByAccountCode(accountCode);
 
-        if(client.isPresent()){
-            return convertToDto(client.get());
-        }else{
+        //check if client and target device exist
+        if(client.filter(
+                c -> c.getTargetDevice()
+                        .stream()
+                        .anyMatch(e->e.getName().equals(targetDevice)))
+                .isPresent()){
+                return convertToDto(client.get());
+            }else{
             return null;
         }
+
+
 
     }
 
