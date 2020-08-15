@@ -48,4 +48,23 @@ public class TargetDevice implements Serializable {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean checkIfHostsAvailable(){
+        for(Host host : hosts){
+            if(host.getCurrentStockDns()>0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Host getBalancedHost() {
+        Host balanced = null;
+        for (Host host : hosts) {
+            if (host.getCurrentStockDns() > 0) {
+                balanced= host;
+            }
+        }
+        return balanced;
+    }
 }

@@ -16,13 +16,17 @@ public class Host implements Serializable {
     private String hostDns;
 
     @Column
-    private Integer percentage;
+    private Integer originalStockDns;
+
+    @Column
+    private Integer currentStockDns;
 
     public Host() {
     }
-    public Host(String hostDns,Integer percentage) {
-        this.hostDns=hostDns;
-        this.percentage=percentage;
+    public Host(String hostDns,Integer stockDns) {
+        this.hostDns = hostDns;
+        this.originalStockDns = stockDns;
+        this.originalStockDns = stockDns;
     }
 
 }

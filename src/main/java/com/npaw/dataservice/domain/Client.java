@@ -19,4 +19,5 @@ public class Client implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TargetDevice> targetDevice;
 
+
 }

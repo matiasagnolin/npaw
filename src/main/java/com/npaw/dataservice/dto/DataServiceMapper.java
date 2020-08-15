@@ -3,26 +3,24 @@ package com.npaw.dataservice.dto;
 import com.npaw.dataservice.domain.TargetDevice;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 public class DataServiceMapper {
 
-    public static DataServiceDto transform(List<TargetDevice> targetDevices, String requestDevice){
+    public static DataServiceDto transform(TargetDevice targetDevice){
         DataServiceDto ds = new DataServiceDto();
 
-        TargetDevice td = targetDevices.stream()
-                .filter(t -> t.getName().equals(requestDevice))
-                .findFirst()
-                .get();
+        ds.setPingTime(targetDevice.getPingTime());
 
-        ds.setPingTime(td.getPingTime());
+        ds.setHost(targetDevice.getBalancedHost().getHostDns());
 
-        ds.setHost(td.getHosts().stream()
-                .map( h-> h.getHostDns())
-                .collect(Collectors.toList()));
+        ds.setUniqueCode(UUID.randomUUID()
+                .toString()
+                .replace("-",""));
 
         return ds;
     }
+
 
 
 }

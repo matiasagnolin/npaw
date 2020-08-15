@@ -13,8 +13,12 @@ import java.util.List;
 public abstract class BaseTest {
     protected Client client;
     protected MultiValueMap<String,String> param;
+    protected MultiValueMap<String,String> paramWrong;
     protected List<TargetDevice> targetDevices;
     protected List<Host> hosts;
+    protected final static int percentageClusterA=70;
+    protected final static int percentageClusterB=30;
+    protected final static String dnsClusterA="clusterA.com";
 
     @Before
     public void setUp(){
@@ -22,6 +26,11 @@ public abstract class BaseTest {
         param.add("accountCode","ClienteA");
         param.add("targetDevice","XBox");
         param.add("pluginVersion","3.1.1");
+
+        paramWrong = new LinkedMultiValueMap<>();
+        paramWrong.add("accountCode","fake");
+        paramWrong.add("targetDevice","fake");
+        paramWrong.add("pluginVersion","fake");
 
         client = new Client();
         client.setAccountCode(param.getFirst("accountCode"));

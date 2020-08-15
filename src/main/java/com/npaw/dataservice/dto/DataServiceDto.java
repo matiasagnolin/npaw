@@ -1,18 +1,24 @@
 package com.npaw.dataservice.dto;
 import lombok.Data;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
+
 @XmlRootElement(name = "q")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class DataServiceDto {
-    @XmlElement
-    private List<String> host;
-    @XmlElement
+
+    @XmlElement(name="h")
+    private String host;
+
+    @XmlElement(name = "pt")
     private String pingTime;
-    @XmlElement
-    private String uniqueHash;
+
+    @XmlElement(name="c")
+    private String uniqueCode;
+
+
 
 }
