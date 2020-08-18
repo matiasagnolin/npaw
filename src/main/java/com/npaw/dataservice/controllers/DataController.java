@@ -34,6 +34,7 @@ public class DataController {
         DataServiceDto respond = null;
         Optional<TargetDevice> td = Optional.ofNullable(null);
 
+
         Optional<Client> client =
                 clientFinder.findClientByAccountCode(accountCode);
 

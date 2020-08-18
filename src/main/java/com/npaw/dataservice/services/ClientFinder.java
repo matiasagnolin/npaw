@@ -3,6 +3,7 @@ package com.npaw.dataservice.services;
 import com.npaw.dataservice.domain.Client;
 import com.npaw.dataservice.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ public class ClientFinder implements IFinderService{
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "Client",key = "#p0")
     public Optional<Client> findClientByAccountCode(String accountCode){
         return repository.findDataByAccountCode(accountCode);
     }

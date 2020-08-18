@@ -5,6 +5,7 @@ import com.npaw.dataservice.domain.TargetDevice;
 import com.npaw.dataservice.dto.DataServiceDto;
 import com.npaw.dataservice.dto.DataServiceMapper;
 import com.npaw.dataservice.services.ClientFinder;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.Optional;
 
 @Sql(scripts = "classpath:data.sql")
+@Slf4j
 public class DataServiceTest extends RequestHelperTest {
 
     @Autowired
@@ -41,8 +43,8 @@ public class DataServiceTest extends RequestHelperTest {
     }
     @Test
     public void it_should_not_find_account(){
-        Optional<Client> client = clientFinder.findClientByAccountCode(
-                param.getFirst("fakeAccount"));
+        Optional<Client> client =
+                clientFinder.findClientByAccountCode("fakeAccount");
 
         Assert.assertTrue(!client.isPresent());
 
@@ -86,7 +88,7 @@ public class DataServiceTest extends RequestHelperTest {
         it_should_response_empty_body("/getData",200,"GET",paramWrong);
     }
     @Test
-    public void it_should_balance_cluster_dns() throws Exception {
+    public void it_should_balance_cluster_dns_integration_test() throws Exception {
         Optional<Client> client = null;
         int counterA=0;
         int counterB=0;
@@ -102,10 +104,11 @@ public class DataServiceTest extends RequestHelperTest {
                     .findFirst()
                     .get();
 
-            it_should_response_expected_status_and_xml_body("/getData",200,"GET",param);
-
             String host = td.getBalancedHost().getHostDns();
             Integer currentStock = td.getBalancedHost().getCurrentStockDns();
+
+            it_should_response_expected_status_and_xml_body("/getData",200,"GET",param);
+
 
             if(host.equals(dnsClusterA)){
                 counterA= percentageClusterA- currentStock;
@@ -117,4 +120,15 @@ public class DataServiceTest extends RequestHelperTest {
         Assert.assertEquals(percentageClusterB,counterB+1);
 
     }
+    /*@Test
+    public void it_should_work_with_backup_db() throws Exception {
+        Optional<Client> client =
+                clientFinder.findClientByAccountCode(
+                        param.getFirst("accountCode"));
+        configuration.shutdownMainDB();
+        Optional<Client> client2 =
+                clientFinder.findClientByAccountCode(
+                        param.getFirst("accountCode"));
+        Assert.assertTrue(client.isPresent());
+    }*/
 }
