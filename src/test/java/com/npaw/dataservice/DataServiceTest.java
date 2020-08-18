@@ -120,15 +120,4 @@ public class DataServiceTest extends RequestHelperTest {
         Assert.assertEquals(percentageClusterB,counterB+1);
 
     }
-    /*@Test
-    public void it_should_work_with_backup_db() throws Exception {
-        Optional<Client> client =
-                clientFinder.findClientByAccountCode(
-                        param.getFirst("accountCode"));
-        configuration.shutdownMainDB();
-        Optional<Client> client2 =
-                clientFinder.findClientByAccountCode(
-                        param.getFirst("accountCode"));
-        Assert.assertTrue(client.isPresent());
-    }*/
 }
